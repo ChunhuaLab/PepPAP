@@ -1,1 +1,3 @@
-# A deep attention model for wide-genome protein-peptide binding affinity prediction at sequence level
+The models are puutted in the following web:
+
+https://huggingface.co/SXH01/PepPAP/tree/main
