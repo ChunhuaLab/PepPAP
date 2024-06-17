@@ -30,15 +30,53 @@ pepseq='SIYRYYGL'
 
 * Place the protein and peptide sequences of 1G6R in their designated positions within the run.sh file. 
 
-* Run the following command:
+* Run the following commands:
+  
+  proseq='QSVTQPDARVTVSEGASLQLRCKYSYSATPYLFWYVQYPRQGLQLLLKYYSGDPVVQGVNGFEAEFSKSNSSFHLRKASVHWSDSAVYFCAVSGFASALTFGSGTKVIVLPYIQNPEPAVYALKDPRSQDSTLCLFTDFDSQINVPKTMESGTFITDATVLDMKAMDSKSNGAIAWSNQTSFTCQDIFKETNATYPSSDVPC'
 
- ./run.sh
+  pepseq='SIYRYYGL'
+
+  echo  Begin to extract features from protein and peptide !
+  
+  cp ./codes/gene_intrinsic_disorder.py ./softwares/iupred2a/
+  
+  python ./softwares/iupred2a/gene_intrinsic_disorder.py $proseq $pepseq
+  
+  python ./codes/gen_env_padding_feature.py $proseq $pepseq
+  
+  python ./codes/Physicochemical_characteristics.py $proseq $pepseq
+  
+  python ./codes/SP_score.py $proseq $pepseq
+  
+  echo  Begin to extract features from protein and peptide!
+  
+  echo The calculation has been completed !
+  
+  echo Begin to predicte binding affinity value !
+  
+  python ./codes/predicted.py
+
+Or directly run the following command:
+
+  ./run.sh
  
 The finally output is shown in "./results/predected_result.txt".
 
 The predicted (pKd/pKi) value is: 4.204 
 
 The predicted ¦¤G (kcal/mol) value is:-5.711 
+
+## Training PepPAP
+
+Follow the steps in the prediction section to extract features.
+
+After extracting the features, to train PepPAP run the following command. 
+
+  cd PepPAP/utils
+  
+  python train.py 
+
+
 
 ## Help
 
